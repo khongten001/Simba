@@ -951,7 +951,6 @@ begin
   end;
 end;
 
-
 procedure TATScrollbar.SetMax(Value: Int64);
 begin
   if FMax<>Value then

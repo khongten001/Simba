@@ -99,7 +99,7 @@ type
 implementation
 
 uses
-  Math;
+  Math, simba.theme;
 
 constructor TSimbaTreeView.Create(AOwner: TComponent; NodeClass: TTreeNodeClass);
 begin
@@ -135,8 +135,9 @@ begin
   FTree.ExpandSignType := tvestArrow;
   FTree.ExpandSignColor := clWhite;
   FTree.TreeLinePenStyle := psClear;
-  FTree.Font.Color := clWhite;
-  FTree.BackgroundColor := $322F2D;
+  FTree.Font.Color := SimbaTheme.ColorFont;
+  FTree.BackgroundColor := SimbaTheme.ColorBackground;
+  FTree.SelectionColor := SimbaTheme.ColorActive;
   FTree.OnCreateNodeClass := @DoCreateNodeClass;
   FTree.OnMouseMove := @DoMouseMove;
   FTree.DragMode := dmAutomatic;
@@ -153,31 +154,30 @@ begin
   FFilterEdit.Align := alBottom;
   FFilterEdit.OnChange := @DoFilterChange;
 
-  FFilterEdit.Color := $322F2D;
-  FFilterEdit.ColorBorder := $4A4136;
-  FFilterEdit.ColorBorderActive := $D77800;
-  FFilterEdit.ColorSelection := $D77800;
-  FFilterEdit.Font.Color := clWhite;
+  FFilterEdit.Color := SimbaTheme.ColorBackground;
+  FFilterEdit.ColorBorder := SimbaTheme.ColorFrame;
+  FFilterEdit.ColorBorderActive := SimbaTheme.ColorActive;
+  FFilterEdit.ColorSelection := SimbaTheme.ColorActive;
+  FFilterEdit.Font.Color := SimbaTheme.ColorFont;
   FFilterEdit.HintTextColor := clLtGray;
   FFilterEdit.HintText := '(search)';
 
   with ATScrollbarTheme do
   begin
-    InitialSize := 30;
-
-    ColorBG := $322F2D;
-    ColorThumbBorder := $4A4136;
-    ColorThumbFill := $4A4136;
-    ColorThumbFillOver := $4A4136;
-    ColorThumbFillPressed := $4A4136;
-    ColorThumbDecor := $4A4136;
-
-    ThumbMinSize := Scale96ToScreen(15);
+    InitialSize := Scale96ToScreen(16);
+    ThumbMinSize := Scale96ToScreen(36);
+    ThumbRoundedRect := False;
     DirectJumpOnClickPageUpDown := True;
 
-    ColorArrowFill := $4A4136;
-    ColorArrowBorder := $4A4136;
-    ColorArrowSign := $87827A;
+    ColorBG := SimbaTheme.ColorScrollBarInActive;
+    ColorThumbBorder := SimbaTheme.ColorScrollBarActive;
+    ColorThumbFill := SimbaTheme.ColorScrollBarActive;
+    ColorThumbFillOver := SimbaTheme.ColorScrollBarActive;
+    ColorThumbFillPressed := SimbaTheme.ColorScrollBarActive;
+    ColorThumbDecor := SimbaTheme.ColorScrollBarActive;
+    ColorArrowFill := SimbaTheme.ColorScrollBarActive;
+    ColorArrowBorder := SimbaTheme.ColorScrollBarActive;
+    ColorArrowSign := SimbaTheme.ColorLine;
   end;
 end;
 
@@ -404,7 +404,7 @@ begin
   end;
 
   Sender.Canvas.Pen.Width := 2;
-  Sender.Canvas.Pen.Color := $989796;
+  Sender.Canvas.Pen.Color := SimbaTheme.ColorLine;
   Sender.Canvas.Polyline(Points);
 end;
 
